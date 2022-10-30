@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>products</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<table border="1">
+    <tr>
+
+
+        <td colspan="3">
+            <form th:action="@{/products/add}" th:object="${productDTO}" method="post" enctype="multipart/form-data">
+                <table>
+                    <tr>
+                        <td>Title</td>
+                        <td><input type="text" th:field="*{title}"></td>
+                    </tr>
+                    <tr>
+                        <td>Price</td>
+                        <td><input type="text" th:field="*{price}"></td>
+                    </tr>
+                    <tr>
+                        Перша фотографія: <input type="file" name="file1"/><br><br>
+                        Друга фотографія: <input type="file" name="file2"/><br><br>
+                        Третя фотографія: <input type="file" name="file3"/><br><br>
+                    </tr>
+
+                </table>
+                <button id="send" type="submit">Add</button>
+            </form>
+        </td>
+
+
+    </tr>
+    <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+    <tr th:each="product : ${products}">
+        <td th:text="${product.title}">Title</td>
+        <td th:text="${product.price}">00.00</td>
+        <td><a th:href="@{/products/{id}/delete(id=${product.id})}">Remove</a></td>
+    </tr>
+</table>
+
+</body>
+</html>

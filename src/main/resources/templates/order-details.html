@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>order-details</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<table>
+    <tr>
+        <td>Id :</td>
+        <td colspan="4" th:text="${orderDTO.id}"></td>
+    </tr>
+    <tr>
+        <td>Created at :</td>
+        <td colspan="4" th:text="${orderDTO.created}"></td>
+    </tr>
+    <tr>
+        <td>Status :</td>
+        <td colspan="4" th:text="${orderDTO.status}"></td>
+    </tr>
+    <tr>
+        <td>First name :</td>
+        <td colspan="4" th:text="${orderDTO.firstName}"></td>
+    </tr>
+    <tr>
+        <td>Last name :</td>
+        <td colspan="4" th:text="${orderDTO.lastName}"></td>
+    </tr>
+    <tr>
+        <td>Email :</td>
+        <td colspan="4" th:text="${orderDTO.email}"></td>
+    </tr>
+    <tr>
+        <td>Address :</td>
+        <td colspan="4" th:text="${orderDTO.address}"></td>
+    </tr>
+    <tr>
+        <td>Phone number :</td>
+        <td colspan="4" th:text="${orderDTO.phone_number}"></td>
+    </tr>
+    <tr>
+        <td>Payment method :</td>
+        <td colspan="4" th:text="${orderDTO.paymentMethod}"></td>
+    </tr>
+
+
+</table>
+
+<table border="1">
+    <tr>
+        <td colspan="5">Goods :</td>
+    </tr>
+    <tr>
+
+        <td colspan="2">Title</td>
+        <td>Amount</td>
+        <td>Price</td>
+        <td>Sum</td>
+    </tr>
+
+    <tr th:each="orderToProduct : ${orderDTO.ordersToProduct}">
+
+        <td colspan="2" th:text="${orderToProduct.product.title}">Cheese</td>
+        <td th:text="${orderToProduct.amount}">2</td>
+        <td th:text="${orderToProduct.price}">11.0</td>
+        <td th:text="${orderToProduct.sum}">22</td>
+    </tr>
+    <tr>
+        <td colspan="4"></td>
+        <th th:text="${orderDTO.sum}"></th>
+    </tr>
+</table>
+
+
+</body>
+</html>

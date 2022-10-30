@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>manager</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+
+<table border="1">
+    <tr>
+        <td>Id</td>
+        <td>Created at</td>
+        <td>Status</td>
+        <td></td>
+    </tr>
+    <tr th:each="orderDTO : ${orderDTOs}">
+
+        <td th:text="${orderDTO.id}">Id</td>
+        <td th:text="${orderDTO.created}">Created</td>
+        <td th:text="${orderDTO.status}">Status</td>
+        <td><a th:href="@{/orders/{id}/details(id=${orderDTO.id})}">details</a></td>
+
+    </tr>
+</table>
+</body>
+</html>

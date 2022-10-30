@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>E-Shop-Mykola</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<div sec:authorize="hasAnyAuthority('ADMIN')">
+    <span>Current UUID: <a th:text="${uuid}">10</a></span>
+    <br>
+    <span>Person UUID: <a th:text="${currentPersonUuid}">10</a></span>
+    <br>
+    <span>Amount clicks: <a th:text="${amountClicks}">10</a></span>
+</div>
+
+<table border="1">
+    <tr>
+        <td>Images</td>
+        <td>Title</td>
+        <td>Price</td>
+        <td></td>
+    </tr>
+
+    <tr th:each="product : ${products}">
+
+        <td>
+            <table>
+                <tr th:each="productImage : ${product.productImages}">
+                    <img th:src="@{/images/{id} (id=${productImage.id}) }" height="60">
+                </tr>
+            </table>
+        </td>
+
+        <td th:text="${product.title}">Title</td>
+        <td th:text="${product.price}">00.00</td>
+        <td><a th:href="@{/products/{id}/bucket(id=${product.id})}">Add to bucket</a></td>
+    </tr>
+
+</table>
+
+</body>
+</html>

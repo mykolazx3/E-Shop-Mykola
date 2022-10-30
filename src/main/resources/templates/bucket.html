@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>bucket</title>
+</head>
+<body>
+<div th:insert="~{fragments/menu :: #nav-menu}"></div>
+
+<h2>Your bucket</h2>
+<h3>All sum -> <b th:text="${bucket.sum}">sum</b></h3>
+
+<table border="1" align="left">
+    <td>
+        <table border="1">
+            <tr>
+                <td>Title</td>
+                <td>Amount</td>
+                <td>Price</td>
+                <td>Sum</td>
+                <td colspan="2"></td>
+            </tr>
+            <tr th:each="bucketProductDTO : ${bucket.bucketProductDTOs}">
+                <td th:text="${bucketProductDTO.title}">Cheese</td>
+                <td th:text="${bucketProductDTO.amount}">2</td>
+                <td th:text="${bucketProductDTO.price}">11.0</td>
+                <td th:text="${bucketProductDTO.sum}">22</td>
+                <td><a th:href="@{/bucket/{id}/delete-one(id=${bucketProductDTO.productId})}">Remove One</a></td>
+                <td><a th:href="@{/bucket/{id}/delete-row(id=${bucketProductDTO.productId})}">Remove Row</a></td>
+
+            </tr>
+        </table>
+    </td>
+    <td>
+        <a href="/bucket/delete-all">Remove All</a>
+    </td>
+</table>
+
+<form th:action="@{/orders/create-order}" th:object="${orderDTO}" method="post">
+    <table border="1" align="right">
+        <tr>
+            <td>First name</td>
+            <td><input type="text" th:field="*{firstName}"></td>
+        </tr>
+        <tr>
+            <td>Last name</td>
+            <td><input type="text" th:field="*{lastName}"></td>
+        </tr>
+        <tr>
+            <td>Email</td>
+            <td><input type="email" th:field="*{email}"></td>
+        </tr>
+
+        <tr>
+            <td>Address</td>
+            <td><input type="text" th:field="*{address}"></td>
+        </tr>
+
+        <tr>
+            <td>Phone number</td>
+            <td><input type="text" th:field="*{phone_number}"></td>
+        </tr>
+
+        <tr>
+            <td>Payment method</td>
+            <td><input type="text" th:field="*{paymentMethod}"></td>
+        </tr>
+
+        <tr>
+            <td colspan="2">
+                <button type="submit">Create Order</button>
+            </td>
+        </tr>
+    </table>
+</form>
+
+
+</body>
+</html>

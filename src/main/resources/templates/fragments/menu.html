@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+
+<table id="nav-menu" width="100%">
+    <tr>
+
+        <td>
+            <table>
+                <tr>
+                    <td><h1><a th:href="@{/}">E-Shop-Mykola</a></h1></td>
+                    <td><a th:href="@{/bucket}">Bucket</a></td>
+                    <td><a th:href="@{/orders}">Orders</a></td>
+
+                    <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')"><a th:href="@{/orders/manager}">Orders-Manager</a></td>
+                    <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')"><a th:href="@{/products}">Products</a></td>
+                    <td sec:authorize="hasAnyAuthority('ADMIN', 'MANAGER')"><a th:href="@{/users}">Users</a></td>
+                </tr>
+            </table>
+        </td>
+        <td align="right">
+            <div sec:authorize="isAuthenticated()">
+                <div>
+                    <a th:href="@{/users/profile}"><span sec:authentication="principal.username">Profile</span></a>
+                </div>
+                <div>
+                    <a th:href="@{/logout}">Logout</a>
+                </div>
+            </div>
+
+            <div sec:authorize="!isAuthenticated()">
+                <div>
+                    <a th:href="@{/login}">Login</a>
+                </div>
+            </div>
+        </td>
+    </tr>
+</table>
+
+
+</body>
+</html>
